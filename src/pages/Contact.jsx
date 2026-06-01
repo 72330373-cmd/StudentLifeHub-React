@@ -1,4 +1,13 @@
+import { useState } from "react";
+
 function Contact() {
+
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // stop page reload
+    setSent(true); // show "Done"
+  };
 
   return (
     <div className="container py-5">
@@ -9,7 +18,7 @@ function Contact() {
 
       <div className="contact-box">
 
-        <form>
+        <form onSubmit={handleSubmit}>
 
           <input
             type="text"
@@ -29,16 +38,22 @@ function Contact() {
             className="form-control mb-3"
           ></textarea>
 
-          <button className="btn btn-success w-100">
+          <button type="submit" className="btn btn-success w-100">
             Send Message
           </button>
 
         </form>
 
+        {sent && (
+          <p className="text-success text-center mt-3">
+            Done ✔ Message sent
+          </p>
+        )}
+
       </div>
 
     </div>
-  )
+  );
 }
 
-export default Contact
+export default Contact;
